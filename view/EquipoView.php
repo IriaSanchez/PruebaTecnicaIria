@@ -7,8 +7,27 @@ aunque no se muestre en el html-->
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Añado el script de jQuery requerido en la práctica -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+
+
+
 
     <title>Deportes</title>
 </head>
@@ -16,30 +35,6 @@ aunque no se muestre en el html-->
 
 
 
-<h1>Listado de Equipos</h1>
-
-<table>
-    <tr>
-        <th>Nombre</th>
-        <th>Ciudad</th>
-        <th>Deporte</th>
-        <th>Fecha</th>
-        <th>Acciones</th>
-    </tr>
-
-    <?php foreach ($equipos as $equipo) : ?>
-        <tr>
-            <td><?= $equipo['nombre'] ?></td>
-            <td><?= $equipo['ciudad'] ?></td>
-            <td><?= $equipo['deporte'] ?></td>
-            <td><?= $equipo['fecha'] ?></td>
-            <td>
-                <!-- Agregar enlace para ver detalles -->
-                <a href="ver_equipo.php?id=<?= $equipo['id'] ?>">Información</a>
-            </td>
-        </tr>
-    <?php endforeach; ?>
-</table>
 
 
 
@@ -77,6 +72,38 @@ aunque no se muestre en el html-->
     <br><br>
     <button type="submit">Guardar Equipo</button>
 </form>
+
+
+
+<h1>Listado de Equipos</h1>
+
+<table>
+    <tr>
+        <th>Nombre</th>
+        <th>Ciudad</th>
+        <th>Deporte</th>
+        <th>Fecha</th>
+        <th>Acciones</th>
+    </tr>
+
+    <?php foreach ($equipos as $equipo) : ?>
+        <tr>
+            <td><?= $equipo['nombre'] ?></td>
+            <td><?= $equipo['ciudad'] ?></td>
+            <td><?= $equipo['deporte'] ?></td>
+            <td><?= $equipo['fecha'] ?></td>
+            <td>
+                <!-- Agregar enlace para ver detalles -->
+                <a href="ver_equipo.php?id=<?= $equipo['id'] ?>">Información</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
+
+    <!-- Añado el script de jQuery requerido en la práctica -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 
 <!-- Con este script añado la validación del lado del cliente con jQuery -->

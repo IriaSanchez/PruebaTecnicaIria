@@ -51,13 +51,9 @@ class JugadorModel {
 
     public function eliminarJugador($jugadorId) {
         $query = "DELETE FROM Jugador WHERE id = $jugadorId";
-
-        if ($this->conexion->query($query) === TRUE) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->conexion->query($query);
     }
+    
 
 
     public function obtenerJugadorPorId($jugadorId) {
@@ -70,6 +66,9 @@ class JugadorModel {
             return null;
         }
     }
+
+
+    
     
 
 }

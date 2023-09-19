@@ -85,5 +85,23 @@ class EquipoModel {
     }
 
 
+
+    public function obtenerJugadoresPorEquipo($equipoId) {
+        $query = "SELECT * FROM Jugador WHERE equipo_id = $equipoId";
+        $result = $this->conexion->query($query);
+    
+        if ($result && $result->num_rows > 0) {
+            $jugadores = array();
+    
+            while ($row = $result->fetch_assoc()) {
+                $jugadores[] = $row;
+            }
+    
+            return $jugadores;
+        } else {
+            return null;
+        }
+    }
+
 }
 ?>

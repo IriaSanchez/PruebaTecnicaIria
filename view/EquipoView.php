@@ -34,7 +34,8 @@ aunque no se muestre en el html-->
    <!--Dentro del body añado el formulario y la tabla -->
 
 <body>
-<form id="equipoForm" action="guardar_equipo.php" method="post">
+
+  <form id="equipoForm" action="guardar_equipo.php" method="post">
 
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required>
@@ -59,6 +60,23 @@ aunque no se muestre en el html-->
 
         <button type="submit">Guardar Equipo</button>
     </form>
+
+
+    <h2>Agregar Jugador</h2>
+        <form id="jugadorForm">
+            <input type="text" id="nombreJugador" name="nombreJugador" placeholder="Nombre del Jugador" required>
+            <input type="number" id="numeroJugador" name="numeroJugador" placeholder="Número del Jugador" required>
+
+            <!-- Lista desplegable para seleccionar un equipo -->
+            <select id="equipoJugador" name="equipoJugador" required>
+                <option value="">Selecciona un equipo</option>
+                <?php foreach ($equipos as $equipo): ?>
+                    <option value="<?= $equipo['id'] ?>"><?= $equipo['nombre'] ?></option>
+                <?php endforeach; ?>
+            </select>
+
+            <button type="submit">Agregar Jugador</button>
+        </form>
 
 
 
@@ -114,11 +132,10 @@ aunque no se muestre en el html-->
         <!-- Script para la validación del lado del cliente -->
 
         <script>
-    $(document).ready(function () {
-        // ... Resto del código ...
+           $(document).ready(function () {
 
         // Cambia el ID del formulario para evitar duplicaciones de ID
-        $('#equipoForm').submit(function (event) {
+            $('#equipoForm').submit(function (event) {
             event.preventDefault();
 
             var nombre = $('#nombre').val().trim();
@@ -143,6 +160,51 @@ aunque no se muestre en el html-->
 
         });
     });
+</script>
+
+
+
+
+
+
+
+
+<script>
+$(document).ready(function () {
+    // Resto del código
+
+    // Cambia el ID del formulario para evitar duplicaciones de ID
+    $('#equipoForm').submit(function (event) {
+        event.preventDefault();
+        // Resto del código
+    });
+
+    // Agregar jugador
+    $('#jugadorForm').submit(function (event) {
+        event.preventDefault();
+
+        var nombre = $('#nombreJugador').val().trim();
+        var numero = $('#numeroJugador').val().trim();
+        var equipoId = $('#equipoJugador').val(); // Obtén el ID del equipo seleccionado
+
+        if (nombre === '' || numero === '' || isNaN(numero) || equipoId === '') {
+            alert('Todos los campos son obligatorios y el número debe ser un valor numérico.');
+            return;
+        }
+
+        $.post('guardar_jugador.php', {
+            nombre: nombre,
+            numero: numero,
+            equipoId: equipoId
+        }, function (response) {
+            alert('Jugador agregado correctamente.');
+            // Limpia el formulario
+            $('#jugadorForm')[0].reset();
+            // Actualiza la tabla de jugadores
+            actualizarTablaJugadores();
+        });
+    });
+});
 </script>
 
 </body>

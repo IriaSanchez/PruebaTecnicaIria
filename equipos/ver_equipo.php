@@ -37,8 +37,8 @@
 
 
 <?php
-require_once __DIR__ . '/model/EquipoModel.php';
-require_once __DIR__ . '/model/JugadorModel.php';
+require_once __DIR__ . '/../model/EquipoModel.php';
+require_once __DIR__ . '/../model/JugadorModel.php';
 
 // Recojo el id del equipo
 $equipoId = $_GET['id'];
@@ -64,9 +64,19 @@ if ($equipo) {
         echo "<h2>Jugadores del equipo</h2>";
         echo "<table>";
         echo "<tr><th>Nombre</th><th>Número</th></tr>";
+
         foreach ($jugadores as $jugador) {
-            echo "<tr><td>{$jugador['nombre']}</td><td>{$jugador['numero']}</td></tr>";
-        }
+
+        echo "<tr>";
+        echo "<td>{$jugador['nombre']}</td>";
+        echo "<td>{$jugador['numero']}</td>";
+        echo "<td>";
+        echo "<a href='../jugadores/editar_jugador.php?id={$jugador['id']}'>Editar</a> ";
+        echo " | ";
+        echo "<a href='../jugadores/eliminar_jugador.php?id={$jugador['id']}'>Eliminar</a>";
+        echo "</td>";
+        echo "</tr>";      
+      }
         echo "</table>";
     } else {
         echo "No hay jugadores asociados a este equipo.";

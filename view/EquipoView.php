@@ -35,7 +35,7 @@ aunque no se muestre en el html-->
 
 <body>
 
-  <form id="equipoForm" action="guardar_equipo.php" method="post">
+  <form id="equipoForm" action="equipos/guardar_equipo.php" method="post">
 
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required>
@@ -107,7 +107,7 @@ aunque no se muestre en el html-->
                 </td>
                 <td>
                     <!-- Enlace para la info de cada uno -->
-                    <a href="ver_equipo.php?id=<?= $equipo['id'] ?>">Información</a>
+                    <a href="equipos/ver_equipo.php?id=<?= $equipo['id'] ?>">Información</a>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -148,7 +148,7 @@ aunque no se muestre en el html-->
                 return;
             }
 
-            $.post('guardar_equipo.php', $(this).serialize(), function (response) {
+            $.post('equipos/guardar_equipo.php', $(this).serialize(), function (response) {
                 alert('Equipo guardado correctamente.');
                 // Limpio el formulario
                 $('#equipoForm')[0].reset();
@@ -192,7 +192,7 @@ $(document).ready(function () {
             return;
         }
 
-        $.post('guardar_jugador.php', {
+        $.post('jugadores/guardar_jugador.php', {
             nombre: nombre,
             numero: numero,
             equipoId: equipoId

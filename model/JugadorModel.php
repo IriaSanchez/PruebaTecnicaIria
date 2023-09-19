@@ -38,6 +38,40 @@ class JugadorModel {
 
         return $jugadores;
     }
+
+    public function editarJugador($jugadorId, $nuevoNombre, $nuevoNumero) {
+        $query = "UPDATE Jugador SET nombre = '$nuevoNombre', numero = $nuevoNumero WHERE id = $jugadorId";
+
+        if ($this->conexion->query($query) === TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function eliminarJugador($jugadorId) {
+        $query = "DELETE FROM Jugador WHERE id = $jugadorId";
+
+        if ($this->conexion->query($query) === TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function obtenerJugadorPorId($jugadorId) {
+        $query = "SELECT * FROM Jugador WHERE id = $jugadorId";
+        $result = $this->conexion->query($query);
+    
+        if ($result->num_rows === 1) {
+            return $result->fetch_assoc();
+        } else {
+            return null;
+        }
+    }
+    
+
 }
 
 ?>

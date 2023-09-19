@@ -9,8 +9,12 @@
 
     <?php foreach ($jugadores as $jugador): ?>
         <tr>
-            <td><?= $jugador['nombre'] ?></td>
-            <td><?= $jugador['numero'] ?></td>
+            <td>
+                <?= $jugador['nombre'] ?>
+            </td>
+            <td>
+                <?= $jugador['numero'] ?>
+            </td>
             <td>
                 <a href="editar_jugador.php?id=<?= $jugador['id'] ?>">Editar</a>
                 <a href="eliminar_jugador.php?id=<?= $jugador['id'] ?>">Eliminar</a>

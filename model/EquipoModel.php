@@ -2,19 +2,21 @@
 
 /*Defino la clase del modelo con el host, usuario, contraseña,
 bbdd a la que quiero acceder,  el puerto de MariaDB y la conexión privada también*/
-class EquipoModel {
+class EquipoModel
+{
 
     private $host = 'localhost';
     private $usuario = 'root';
     private $contrasena = '';
     private $db_nombre = 'deportes';
-    private $puerto = 3307; 
+    private $puerto = 3307;
     private $conexion;
 
 
     /*Creo el constructor de la clase creando una nueva instancia de la clase mysqli
     para poder establecer la conexión a la bbdd con los valores declarados antes*/
-    public function __construct() {
+    public function __construct()
+    {
 
         $this->conexion = new mysqli($this->host, $this->usuario, $this->contrasena, $this->db_nombre, $this->puerto);
 
@@ -28,28 +30,30 @@ class EquipoModel {
 
 
     //Creo la función para hacer la inserccion 
-    public function insertarEquipo($nombre, $ciudad, $deporte, $fecha) {
+    public function insertarEquipo($nombre, $ciudad, $deporte, $fecha)
+    {
 
         // Creo la consulta para insertar el equipo
         $query = "INSERT INTO Equipo (nombre, ciudad, deporte, fecha) VALUES ('$nombre', '$ciudad', '$deporte', '$fecha')";
-    
-        
+
+
         // La consulta devuelve true si todo fue bien o false si no no se insertó bien
-        if ($this-> conexion-> query($query) === TRUE) {
-            return true; 
+        if ($this->conexion->query($query) === TRUE) {
+            return true;
 
         } else {
-            return false;  
+            return false;
         }
     }
-    
-    
+
+
 
 
 
 
     //Creo la función donde almaceno la consulta y almaceno su resultado en una variable nueva
-    public function obtenerEquipos() {
+    public function obtenerEquipos()
+    {
 
         $query = "SELECT * FROM Equipo";
         $result = $this->conexion->query($query);
@@ -68,35 +72,38 @@ class EquipoModel {
 
 
     //Función para crear una página propia para cada equipo. Busca por su id único
-    public function obtenerEquipoPorId($equipoId) {
+    public function obtenerEquipoPorId($equipoId)
+    {
+        // Verifica que el equipoId no esté vacío y sea numérico
+        if (!empty($equipoId) && is_numeric($equipoId)) {
+            // Creo la consulta
+            $query = "SELECT * FROM Equipo WHERE id = $equipoId";
 
-        // Creo la consulta
-        $query = "SELECT * FROM Equipo WHERE id = $equipoId";
+            // Ejecuto la consulta
+            $result = $this->conexion->query($query);
 
-        //La ejecuto
-        $result = $this->conexion->query($query);
-
-        if ($result && $result->num_rows > 0) {
-            return $result->fetch_assoc();
-
-        } else {
-            return null;  
+            if ($result && $result->num_rows > 0) {
+                return $result->fetch_assoc();
+            }
         }
+        return null;
     }
 
 
 
-    public function obtenerJugadoresPorEquipo($equipoId) {
+
+    public function obtenerJugadoresPorEquipo($equipoId)
+    {
         $query = "SELECT * FROM Jugador WHERE equipo_id = $equipoId";
         $result = $this->conexion->query($query);
-    
+
         if ($result && $result->num_rows > 0) {
             $jugadores = array();
-    
+
             while ($row = $result->fetch_assoc()) {
                 $jugadores[] = $row;
             }
-    
+
             return $jugadores;
         } else {
             return null;

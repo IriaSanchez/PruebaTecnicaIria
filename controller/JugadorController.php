@@ -2,14 +2,17 @@
 
 require_once __DIR__ . '/../model/JugadorModel.php';
 
-class JugadorController {
+class JugadorController
+{
     private $jugadorModel;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->jugadorModel = new JugadorModel();
     }
 
-    public function agregarJugador($nombre, $numero, $equipoId) {
+    public function agregarJugador($nombre, $numero, $equipoId)
+    {
         $resultado = $this->jugadorModel->insertarJugador($nombre, $numero, $equipoId);
 
         if ($resultado) {
@@ -19,7 +22,8 @@ class JugadorController {
         }
     }
 
-    public function obtenerJugadoresPorEquipo($equipoId) {
+    public function obtenerJugadoresPorEquipo($equipoId)
+    {
         $jugadores = $this->jugadorModel->obtenerJugadoresPorEquipo($equipoId);
         require_once __DIR__ . '/../view/JugadorView.php';
     }

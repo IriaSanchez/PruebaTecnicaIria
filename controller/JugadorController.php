@@ -13,14 +13,19 @@ class JugadorController
 
     public function agregarJugador($nombre, $numero, $equipoId)
     {
+        // Llama al método para insertar jugador en el modelo
         $resultado = $this->jugadorModel->insertarJugador($nombre, $numero, $equipoId);
-
+    
         if ($resultado) {
-            echo "Jugador insertado correctamente.";
+            // Si la inserción fue exitosa, redirige a la página del equipo
+            header("Location: /equipos/ver_equipo.php?id=" . $equipoId);
+            exit();
         } else {
             echo "Error al insertar el jugador.";
         }
     }
+    
+    
 
     public function obtenerJugadoresPorEquipo($equipoId)
     {

@@ -22,10 +22,11 @@ class JugadorModel
     {
         $query = "INSERT INTO Jugador (nombre, numero, equipo_id) VALUES ('$nombre', $numero, $equipoId)";
 
-        if ($this->conexion->query($query) === TRUE) {
-            return true;
+        if ($this->conexion->query($query)) {
+            return true; // La inserción fue exitosa
         } else {
-            return false;
+            echo "Error en la inserción: " . $this->conexion->error;
+            return false; // Hubo un error en la inserción
         }
     }
 
@@ -47,12 +48,18 @@ class JugadorModel
     {
         $query = "UPDATE Jugador SET nombre = '$nuevoNombre', numero = $nuevoNumero WHERE id = $jugadorId";
 
-        if ($this->conexion->query($query) === TRUE) {
-            return true;
+        if ($this->conexion->query($query)) {
+            return true; // La actualización fue exitosa
         } else {
-            return false;
+            echo "Error en la actualización: " . $this->conexion->error;
+            return false; // Hubo un error en la actualización
         }
     }
+  
+    
+    
+    
+    
 
     public function eliminarJugador($jugadorId)
     {

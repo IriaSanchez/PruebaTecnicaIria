@@ -4,7 +4,7 @@
     <tr>
         <th>Nombre</th>
         <th>Número</th>
-        <th>Acciones</th>
+        <th>Detalles</th>
     </tr>
 
     <?php foreach ($jugadores as $jugador): ?>

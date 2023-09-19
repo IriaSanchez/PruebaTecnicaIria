@@ -1,13 +1,23 @@
 <?php
 require_once __DIR__ . '/controller/EquipoController.php';
 
-//Recojo con post todos los datos del formulario
-$nombre = $_POST['nombre'];
-$ciudad = $_POST['ciudad'];
-$deporte = $_POST['deporte'];
-$fecha = $_POST['fecha'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nombre = $_POST['nombre'];
+    $ciudad = $_POST['ciudad'];
+    $deporte = $_POST['deporte'];
+    $fecha = $_POST['fecha'];
 
-// Creo una instancia del controlador y añado el equipo
-$equipoController = new EquipoController();
-$equipoController->agregarEquipo($nombre, $ciudad, $deporte, $fecha);
+    if (empty($nombre) || empty($ciudad) || empty($deporte) || empty($fecha)) {
+        echo 'Todos los campos son obligatorios';
+    } else {
+        $equipoController = new EquipoController();
+        $equipoController->agregarEquipo($nombre, $ciudad, $deporte, $fecha);
+        echo 'Equipo guardado correctamente.';
+    }
+} else {
+    echo "Acceso no válido.";
+}
+
+// Redirige a index.php
+header("Location: index.php");
 ?>

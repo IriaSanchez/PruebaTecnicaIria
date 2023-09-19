@@ -2,7 +2,6 @@
 
 /*Defino la clase del modelo con el host, usuario, contraseña,
 bbdd a la que quiero acceder,  el puerto de MariaDB y la conexión privada también*/
- 
 class EquipoModel {
 
     private $host = 'localhost';
@@ -15,7 +14,6 @@ class EquipoModel {
 
     /*Creo el constructor de la clase creando una nueva instancia de la clase mysqli
     para poder establecer la conexión a la bbdd con los valores declarados antes*/
-
     public function __construct() {
 
         $this->conexion = new mysqli($this->host, $this->usuario, $this->contrasena, $this->db_nombre, $this->puerto);
@@ -30,14 +28,13 @@ class EquipoModel {
 
 
     //Creo la función para hacer la inserccion 
-
     public function insertarEquipo($nombre, $ciudad, $deporte, $fecha) {
+
         // Creo la consulta para insertar el equipo
         $query = "INSERT INTO Equipo (nombre, ciudad, deporte, fecha) VALUES ('$nombre', '$ciudad', '$deporte', '$fecha')";
     
         
         // La consulta devuelve true si todo fue bien o false si no no se insertó bien
-        
         if ($this-> conexion-> query($query) === TRUE) {
             return true; 
 

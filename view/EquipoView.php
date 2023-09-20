@@ -1,7 +1,8 @@
 <!--En la vista creo un html básico con una tabla 
  para mostrar el resultado.
 Además de esos campos, la bbdd contiene un id único autoincremental para cada uno de los equipos
-aunque no se muestre en el html-->
+aunque no se muestre en el html
+Estilos muy básicos para mejorar un poco la apariencia de cara al usuario -->
 
 <!DOCTYPE html>
 <html>
@@ -197,12 +198,9 @@ aunque no se muestre en el html-->
 
     <script>
         $(document).ready(function () {
-            // Resto del código
-
             // Cambia el ID del formulario para evitar duplicaciones de ID
             $('#equipoForm').submit(function (event) {
                 event.preventDefault();
-                // Resto del código
             });
 
             // Agregar jugador

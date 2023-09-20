@@ -51,7 +51,7 @@ class EquipoModel
 
 
 
-    //Creo la función donde almaceno la consulta y almaceno su resultado en una variable nueva
+    //Creo la función para hacer la consulta y almaceno su resultado en una variable nueva
     public function obtenerEquipos()
     {
 
@@ -69,6 +69,8 @@ class EquipoModel
         //Devuelvo el resultado
         return $equipos;
     }
+
+
 
 
     //Función para crear una página propia para cada equipo. Busca por su id único
@@ -92,18 +94,26 @@ class EquipoModel
 
 
 
+    //Función para obtener los jugadores de cada equipo a través de su id
+    //equipo_id de Jugador es clave foranea de id de Equipo
     public function obtenerJugadoresPorEquipo($equipoId)
     {
+        //Consulta comparando los ids
         $query = "SELECT * FROM Jugador WHERE equipo_id = $equipoId";
+        //Se ejecuta l consulta en la bbdd
         $result = $this->conexion->query($query);
 
+        //Se almacenan los datos en un array
         if ($result && $result->num_rows > 0) {
             $jugadores = array();
 
+            /*Con el while iteramos sobre los re4sultados de la consulta
+             y se van agregando a las filas que son los jugadores*/
             while ($row = $result->fetch_assoc()) {
                 $jugadores[] = $row;
             }
 
+            //Los devuelve si hay jugadores
             return $jugadores;
         } else {
             return null;

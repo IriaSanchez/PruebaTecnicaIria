@@ -17,7 +17,6 @@ class EquipoController
     //Creo el constructor de la clase creando una nueva instancia
     public function __construct()
     {
-
         $this->equipoModel = new EquipoModel();
     }
 

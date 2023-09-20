@@ -1,25 +1,3 @@
-<?php
-// verificar que se recibió el ID del jugador
-if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-  $jugadorId = $_GET['id'];
-
-  require_once __DIR__ . '/../model/JugadorModel.php';
-
-  // Crear una instancia de JugadorModel
-  $jugadorModel = new JugadorModel();
-
-  $jugador = $jugadorModel->obtenerJugadorPorId($jugadorId);
-
-  if (!$jugador) {
-    echo "Jugador no encontrado.";
-    exit();
-  }
-} else {
-  echo "Solicitud no válida.";
-  exit();
-}
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -27,6 +5,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
   <title>Editar Jugador</title>
 
+  <!--Estilos muy básicos para mejorar un poco la apariencia de cara al usuario -->
   <style>
 
     body {
@@ -58,11 +37,43 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 </head>
 
 <body>
+
+
+    <?php
+
+    // Compruebo que he recibido el id y lo almaceno en la variable jugadorId
+    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+      $jugadorId = $_GET['id'];
+
+
+      require_once __DIR__ . '/../model/JugadorModel.php';
+
+      // Creo una instancia de JugadorModel
+      $jugadorModel = new JugadorModel();
+
+      /*Llama al método obtenerJugadorPorId de JugadorModel 
+      para obtener los detalles del jugador por su id*/
+      $jugador = $jugadorModel->obtenerJugadorPorId($jugadorId);
+
+      if (!$jugador) {
+        echo "Jugador no encontrado.";
+        exit();
+      }
+    } else {
+      echo "Solicitud no válida.";
+      exit();
+    }
+    ?>
+
+  <!--Formulario para editar el jugador-->
   <h2>Editar Jugador</h2>
 
 
   <form action="guardar_jugador.php" method="post">
+
+    <!--Necesito añadir hidden para crear un campo oculto que almacene el id pero no lo muestre -->
     <input type="hidden" name="id" value="<?php echo $jugador['id']; ?>">
+   
     <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="nombre" value="<?php echo $jugador['nombre']; ?>">
     <br><br>
@@ -79,6 +90,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
       $equipoModel = new EquipoModel();
       $equipos = $equipoModel->obtenerEquipos();
 
+      //Itero sobre las opciones de equipos que hay para poder seleccionar una
       foreach ($equipos as $equipo) {
         echo "<option value='{$equipo['id']}'";
         if ($equipo['id'] == $jugador['equipo_id']) {

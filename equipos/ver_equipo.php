@@ -5,6 +5,7 @@
 
     <title>Detalles del Equipo</title>
 
+    <!--Estilos muy básicos para mejorar un poco la apariencia de cara al usuario -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -30,6 +31,8 @@
 
     <?php
 
+    /*Utilizo require para poder incluir en este script de controlador 
+    el EquipoModel.php y JugadorModel.php que no está en este script*/
     require_once __DIR__ . '/../model/EquipoModel.php';
     require_once __DIR__ . '/../model/JugadorModel.php';
 
@@ -50,7 +53,8 @@
         echo "<p><strong>Deporte:</strong> {$equipo['deporte']}</p>";
         echo "<p><strong>Fecha:</strong> {$equipo['fecha']}</p>";
 
-        // Obtener jugadores asociados a este equipo
+        // Obtengo los jugadores asociados a este equipo
+        // Y se muestran en una tabla si los hay, sino, un mensaje con echo
         $jugadores = $jugadorModel->obtenerJugadoresPorEquipo($equipoId);
 
         if ($jugadores) {
